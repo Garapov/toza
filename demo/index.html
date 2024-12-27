@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toza Carousel Demo</title>
+    <link rel="stylesheet" href="../src/carousel.css">
+    <style>
+        /* Demo layout */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        /* Demo slide content */
+        .slide-content {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 100px;
+            box-sizing: border-box;
+        }
+
+        /* Demo controls */
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .controls button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background: #2196F3;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div id="carousel">
+        <div class="toza-carousel-track">
+            <div class="slide-content" style="background-color: #2196F3;">Slide 1</div>
+            <div class="slide-content" style="background-color: #4CAF50;">Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?</div>
+            <div class="slide-content" style="background-color: #FFC107;">Slide 3</div>
+            <div class="slide-content" style="background-color: #9C27B0;">Slide 4</div>
+        </div>
+    </div>
+    <div class="controls">
+        <button onclick="carousel.prev()">Previous</button>
+        <button onclick="carousel.next()">Next</button>
+    </div>
+
+    <script type="module">
+        import { Carousel } from '../src/carousel.js';
+        
+        // Initialize carousel
+        window.carousel = new Carousel('#carousel', {
+            slideDirection: 'vertical',
+            autoHeight: true
+        });
+    </script>
+</body>
+</html>

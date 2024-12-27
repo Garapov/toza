@@ -1,0 +1,21 @@
+{
+  "name": "toza",
+  "version": "0.0.1",
+  "description": "A lightweight, vanilla JavaScript carousel library with horizontal and vertical orientations",
+  "main": "src/carousel.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx http-server . -o /demo/"
+  },
+  "keywords": [
+    "carousel",
+    "slider",
+    "slideshow",
+    "ui",
+    "vanilla-js",
+    "es6"
+  ],
+  "author": "",
+  "license": "ISC"
+}

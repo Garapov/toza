@@ -1,0 +1,28 @@
+/* Carousel container */
+.toza-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Track */
+.toza-carousel-track {
+    display: flex;
+    transition: transform 0.3s ease, height 0.3s ease;
+}
+
+.toza-carousel-track.vertical {
+    flex-direction: column;
+}
+
+/* Slides */
+.toza-carousel-slide {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+/* Active slide */
+.toza-carousel-slide-active {
+    opacity: 1;
+}

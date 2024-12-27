@@ -9,11 +9,22 @@ export class Carousel {
             slideDirection: 'horizontal',
             autoHeight: false,
             itemsPerView: 1,
+            dragThreshold: 50, // minimum drag distance to trigger slide change
             ...options
         };
 
         // Store direction
         this.isVertical = this.options.slideDirection === 'vertical';
+
+        // Initialize drag state
+        this.dragState = {
+            isDragging: false,
+            startX: 0,
+            startY: 0,
+            currentX: 0,
+            currentY: 0,
+            startTranslate: 0
+        };
 
         // Initialize
         this.currentSlide = 0;
@@ -155,12 +166,82 @@ export class Carousel {
             this.calculateDimensions();
             this.goTo(this.currentSlide, true);
         });
+
+        // Mouse drag events
+        this.track.addEventListener('mousedown', this.handleDragStart.bind(this));
+        document.addEventListener('mousemove', this.handleDragMove.bind(this));
+        document.addEventListener('mouseup', this.handleDragEnd.bind(this));
+        document.addEventListener('mouseleave', this.handleDragEnd.bind(this));
+
+        // Prevent default dragging behavior
+        this.track.addEventListener('dragstart', (e) => e.preventDefault());
+    }
+
+    handleDragStart(e) {
+        this.dragState.isDragging = true;
+        this.dragState.startX = e.clientX;
+        this.dragState.startY = e.clientY;
+        this.dragState.currentX = e.clientX;
+        this.dragState.currentY = e.clientY;
+
+        // Get current transform value
+        const transform = window.getComputedStyle(this.track).transform;
+        const matrix = new DOMMatrix(transform);
+        this.dragState.startTranslate = this.isVertical ? matrix.m42 : matrix.m41;
+
+        // Change cursor and disable transition during drag
+        this.track.style.cursor = 'grabbing';
+        this.track.style.transition = 'none';
+    }
+
+    handleDragMove(e) {
+        if (!this.dragState.isDragging) return;
+
+        this.dragState.currentX = e.clientX;
+        this.dragState.currentY = e.clientY;
+
+        const deltaX = this.dragState.currentX - this.dragState.startX;
+        const deltaY = this.dragState.currentY - this.dragState.startY;
+
+        // Calculate new transform based on drag distance
+        const delta = this.isVertical ? deltaY : deltaX;
+        const newTranslate = this.dragState.startTranslate + delta;
+
+        // Apply the transform
+        this.track.style.transform = `translate${this.isVertical ? 'Y' : 'X'}(${newTranslate}px)`;
+    }
+
+    handleDragEnd() {
+        if (!this.dragState.isDragging) return;
+
+        // Reset cursor and restore transition
+        this.track.style.cursor = '';
+        this.track.style.transition = '';
+
+        const delta = this.isVertical 
+            ? this.dragState.currentY - this.dragState.startY
+            : this.dragState.currentX - this.dragState.startX;
+
+        // Determine if we should change slide based on drag distance
+        if (Math.abs(delta) >= this.options.dragThreshold) {
+            if (delta > 0) {
+                this.prev();
+            } else {
+                this.next();
+            }
+        } else {
+            // If drag distance is small, return to current slide
+            this.goTo(this.currentSlide);
+        }
+
+        this.dragState.isDragging = false;
     }
 
     goTo(index, immediate = false) {
         // Validate index
-        if (index < 0) index = this.totalSlides - 1;
-        if (index >= this.totalSlides) index = 0;
+        const maxIndex = Math.max(0, this.totalSlides - this.options.itemsPerView);
+        if (index < 0) index = maxIndex;
+        if (index > maxIndex) index = 0;
         
         // Remove active class from all slides
         Array.from(this.track.children).forEach(slide => {
@@ -170,7 +251,7 @@ export class Carousel {
         // Update position
         this.currentSlide = index;
         
-        // Calculate offset based on slide width
+        // Calculate offset based on slide width and itemsPerView
         const slideWidth = 100 / this.options.itemsPerView;
         const offset = index * -slideWidth;
 

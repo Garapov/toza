@@ -9,9 +9,13 @@ export class Carousel {
             slideDirection: 'horizontal',
             autoHeight: false,
             itemsPerView: 1,
+            gap: 0,  // Add gap option with default 0
             dragThreshold: 50, // minimum drag distance to trigger slide change
             ...options
         };
+
+        // Convert gap to number and handle units
+        this.options.gap = parseInt(this.options.gap) || 0;
 
         // Force autoHeight true in vertical mode
         if (this.options.slideDirection === 'vertical') {
@@ -32,8 +36,6 @@ export class Carousel {
         };
 
         this.init();
-
-
     }
 
     buildStructure() {
@@ -94,13 +96,15 @@ export class Carousel {
         console.log('=== Starting calculateDimensions ===');
         // Get all slides
         const slides = Array.from(this.track.children);
-        console.log('Total slides:', slides.length);
+        this.totalSlides = slides.length;
+        console.log('Total slides:', this.totalSlides);
         
         // Get wrapper dimensions
         const wrapperWidth = this.wrapper.offsetWidth;
         console.log('Wrapper width:', wrapperWidth);
         console.log('Is vertical mode:', this.isVertical);
         console.log('Items per view:', this.options.itemsPerView);
+        console.log('Gap:', this.options.gap);
         
         if (this.isVertical) {
             // In vertical mode
@@ -108,21 +112,42 @@ export class Carousel {
                 slide.style.width = '100%';
                 // Don't set fixed height, let content determine it
                 slide.style.height = 'auto';
+                // Add margin-bottom for gap except last slide
+                slide.style.marginBottom = index < slides.length - 1 ? `${this.options.gap}px` : '0';
                 
                 console.log(`Slide ${index} dimensions:`, {
                     width: slide.style.width,
                     height: slide.style.height,
-                    actualHeight: slide.offsetHeight
+                    actualHeight: slide.offsetHeight,
+                    marginBottom: slide.style.marginBottom
                 });
             });
 
             // Initialize slide positions
             this.updateSlidePositions();
         } else {
-            // In horizontal mode, calculate width based on itemsPerView
-            const slideWidth = wrapperWidth / this.options.itemsPerView;
-            slides.forEach(slide => {
+            // In horizontal mode
+            // Calculate total width needed for all slides with gaps
+            const totalGapsNeeded = this.totalSlides - 1;
+            const totalGapWidth = this.options.gap * totalGapsNeeded;
+            const totalWidth = wrapperWidth * Math.ceil(this.totalSlides / this.options.itemsPerView);
+            const slideWidth = (wrapperWidth - (this.options.gap * (this.options.itemsPerView - 1))) / this.options.itemsPerView;
+            
+            // Set track width to accommodate all slides and gaps
+            this.track.style.width = `${totalWidth + totalGapWidth}px`;
+            
+            slides.forEach((slide, index) => {
                 slide.style.width = `${slideWidth}px`;
+                // Add margin-right for gap except last slide
+                slide.style.marginRight = index < this.totalSlides - 1 ? `${this.options.gap}px` : '0';
+            });
+            
+            console.log('Horizontal mode dimensions:', {
+                wrapperWidth,
+                totalWidth,
+                slideWidth,
+                totalGapWidth,
+                slidesPerGroup: this.options.itemsPerView
             });
             
             // Only update height if autoHeight is true
@@ -176,11 +201,19 @@ export class Carousel {
         });
 
         if (this.isVertical) {
-            // Vertical mode always updates height
+            // Get natural heights of active slides
             const heights = activeSlides.map(slide => slide.offsetHeight);
-            const totalHeight = heights.reduce((sum, height) => sum + height, 0);
-            this.track.style.height = `${totalHeight}px`;
-            console.log('Set track height to sum:', totalHeight);
+            
+            // Calculate total height including gaps between active slides
+            const totalGaps = activeSlides.length - 1;
+            const totalGapHeight = this.options.gap * totalGaps;
+            const totalHeight = heights.reduce((sum, height) => sum + height, 0) + totalGapHeight;
+            
+            // Set wrapper height with animation
+            requestAnimationFrame(() => {
+                this.wrapper.style.height = `${totalHeight}px`;
+            });
+            console.log('Set wrapper height to:', totalHeight, '(including gaps:', totalGapHeight, ')');
             
             this.updateSlidePositions();
         } else if (this.options.autoHeight) {
@@ -189,9 +222,11 @@ export class Carousel {
             const maxHeight = Math.max(...heights);
 
             // Set height for both track and active slides
-            this.track.style.height = `${maxHeight}px`;
-            activeSlides.forEach(slide => {
-                slide.style.height = `${maxHeight}px`;
+            requestAnimationFrame(() => {
+                this.track.style.height = `${maxHeight}px`;
+                activeSlides.forEach(slide => {
+                    slide.style.height = `${maxHeight}px`;
+                });
             });
 
             console.log('Set track and active slides height to max:', maxHeight);
@@ -204,17 +239,25 @@ export class Carousel {
         if (!this.isVertical) return;
 
         const slides = Array.from(this.track.children);
-        this.slidePositions = [0]; // First slide starts at 0
+        this.slidePositions = [0];
         let currentPosition = 0;
 
-        slides.forEach((slide, index) => {
-            if (index < slides.length - 1) {
-                currentPosition += slide.offsetHeight;
-                this.slidePositions.push(currentPosition);
-            }
-        });
+        // Calculate positions including gaps
+        for (let i = 0; i < slides.length - 1; i++) {
+            const slide = slides[i];
+            currentPosition += slide.offsetHeight + this.options.gap;
+            this.slidePositions.push(currentPosition);
+        }
 
+        // Set track height to accommodate all slides and gaps
+        const lastSlide = slides[slides.length - 1];
+        const totalHeight = currentPosition + lastSlide.offsetHeight;
+        requestAnimationFrame(() => {
+            this.track.style.height = `${totalHeight}px`;
+        });
+        
         console.log('Updated slide positions:', this.slidePositions);
+        console.log('Total track height:', totalHeight);
     }
 
     bindEvents() {
@@ -379,11 +422,11 @@ export class Carousel {
                 this.track.style.transform = `translateY(${offset}px)`;
             });
         } else {
-            // In horizontal mode, use percentage-based translation
-            const slideSize = 100 / this.options.itemsPerView;
-            offset = -(index * slideSize);
+            // In horizontal mode, calculate offset including gaps
+            const slideWidth = (this.wrapper.offsetWidth - (this.options.gap * (this.options.itemsPerView - 1))) / this.options.itemsPerView;
+            offset = -(index * (slideWidth + this.options.gap));
             requestAnimationFrame(() => {
-                this.track.style.transform = `translateX(${offset}%)`;
+                this.track.style.transform = `translateX(${offset}px)`;
             });
         }
         

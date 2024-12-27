@@ -12,7 +12,11 @@
             padding: 20px;
             font-family: system-ui, -apple-system, sans-serif;
         }
-
+        .container {
+            max-width: 70vw;
+            margin: 0 auto;
+        }
+        
         /* Demo slide content */
         .slide-content {
             display: flex;
@@ -49,13 +53,13 @@
     </style>
 </head>
 <body>
-    <div id="carousel">
+    <div id="carousel" class="container">
         <div class="toza-carousel-track">
             <div class="slide-content" style="background-color: #2196F3;">Slide 1</div>
             <div class="slide-content" style="background-color: #2196F3;">Slide 1</div>
             <div class="slide-content" style="background-color: #2196F3;">Slide 1</div>
             <div class="slide-content" style="background-color: #2196F3;">Slide 1</div>
-            <div class="slide-content" style="background-color: #4CAF50;">Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?</div>
+            <div class="slide-content" style="background-color: #4CAF50;">Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, dolorum?Slide 2 Lorem ipsum dolor sit amet</div>
             <div class="slide-content" style="background-color: #FFC107;">Slide 3</div>
             <div class="slide-content" style="background-color: #9C27B0;">Slide 4</div>
             <div class="slide-content" style="background-color: #00ff00;">Slide 5</div>
@@ -71,8 +75,10 @@
         
         // Initialize carousel
         window.carousel = new Carousel('#carousel', {
+            slideDirection: 'horizontal',
             autoHeight: true,
-            itemsPerView: 2
+            itemsPerView: 2,
+            gap: 20
         });
     </script>
 </body>

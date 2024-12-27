@@ -20,6 +20,8 @@
     flex-shrink: 0;
     opacity: 0.7;
     transition: opacity 0.3s ease;
+    box-sizing: border-box;
+    padding: 0 5px; /* Add padding for better spacing */
 }
 
 /* Active slide */

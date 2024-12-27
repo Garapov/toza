@@ -8,6 +8,7 @@ export class Carousel {
         this.options = {
             slideDirection: 'horizontal',
             autoHeight: false,
+            itemsPerView: 1,
             ...options
         };
 
@@ -85,9 +86,12 @@ export class Carousel {
         // Get wrapper dimensions
         const wrapperWidth = this.wrapper.offsetWidth;
         
+        // Calculate slide width based on itemsPerView
+        const slideWidth = wrapperWidth / this.options.itemsPerView;
+        
         // Set slide dimensions
         slides.forEach(slide => {
-            slide.style.width = `${wrapperWidth}px`;
+            slide.style.width = `${slideWidth}px`;
         });
     }
 
@@ -114,15 +118,26 @@ export class Carousel {
     updateHeight() {
         if (!this.options.autoHeight) return;
 
-        // Get current slide
-        const currentSlide = this.track.children[this.currentSlide];
-        if (!currentSlide) return;
+        // Get current slide and the next (itemsPerView - 1) slides
+        const activeSlides = [];
+        for (let i = 0; i < this.options.itemsPerView; i++) {
+            const slideIndex = this.currentSlide + i;
+            if (slideIndex >= this.totalSlides) break;
+            
+            const slide = this.track.children[slideIndex];
+            if (slide) {
+                activeSlides.push(slide);
+            }
+        }
 
-        // Get height using measurement container
-        const slideHeight = this.getSlideHeight(currentSlide);
+        if (activeSlides.length === 0) return;
+
+        // Get max height from all active slides
+        const heights = activeSlides.map(slide => this.getSlideHeight(slide));
+        const maxHeight = Math.max(...heights);
         
         // Set track height
-        this.track.style.height = `${slideHeight}px`;
+        this.track.style.height = `${maxHeight}px`;
     }
 
     bindEvents() {
@@ -154,7 +169,10 @@ export class Carousel {
         
         // Update position
         this.currentSlide = index;
-        const offset = index * -100;
+        
+        // Calculate offset based on slide width
+        const slideWidth = 100 / this.options.itemsPerView;
+        const offset = index * -slideWidth;
 
         if (immediate) {
             this.track.style.transition = 'none';
@@ -162,10 +180,15 @@ export class Carousel {
         
         this.track.style.transform = `translate${this.isVertical ? 'Y' : 'X'}(${offset}%)`;
 
-        // Add active class to current slide
-        const currentSlide = this.track.children[this.currentSlide];
-        if (currentSlide) {
-            currentSlide.classList.add('toza-carousel-slide-active');
+        // Add active class to current and next visible slides
+        for (let i = 0; i < this.options.itemsPerView; i++) {
+            const slideIndex = this.currentSlide + i;
+            if (slideIndex >= this.totalSlides) break;
+            
+            const slide = this.track.children[slideIndex];
+            if (slide) {
+                slide.classList.add('toza-carousel-slide-active');
+            }
         }
 
         if (immediate) {

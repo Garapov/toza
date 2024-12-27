@@ -31,16 +31,9 @@ export class Carousel {
             startTranslate: 0
         };
 
-        // Initialize
-        this.currentSlide = 0;
-        this.buildStructure();
-        this.calculateDimensions();
-        this.bindEvents();
-        
-        // Show initial slide
-        this.goTo(0, true);
+        this.init();
 
-        this.wrapper.classList.add('toza-carousel-initialized');
+
     }
 
     buildStructure() {
@@ -331,27 +324,16 @@ export class Carousel {
     init() {
         console.log('=== Starting init ===');
         // Count total slides
-        this.totalSlides = this.track.children.length;
-        
-        // Set initial slide
-        this.currentSlide = 0;
-        
-        // Add vertical class if needed
-        if (this.isVertical) {
-            this.track.classList.add('vertical');
-        }
-        
-        // Build structure
-        this.calculateDimensions();
-        
-        // Set initial position
-        this.goTo(0, true);
-        
-        // Bind events
-        this.bindEvents();
-
-        // Add initialized class
-        this.container.classList.add('toza-carousel-initialized');
+         // Initialize
+         this.currentSlide = 0;
+         this.buildStructure();
+         this.calculateDimensions();
+         this.bindEvents();
+         
+         // Show initial slide
+         this.goTo(0, true);
+ 
+         this.wrapper.classList.add('toza-carousel-initialized');
         
         console.log('=== End init ===');
     }

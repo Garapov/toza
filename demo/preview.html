@@ -22,18 +22,31 @@
             right: -20px;
         }
         .carousel-dots {
-            @apply flex gap-2 justify-center mb-4;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
         }
         .carousel-dot {
-            @apply w-2 h-2 rounded-full bg-gray-200 transition-all duration-200 cursor-pointer;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 9999px;
+            background-color: rgb(229 231 235);
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 200ms;
+            cursor: pointer;
         }
         .carousel-dot.active {
-            @apply bg-blue-500 w-4;
+            background-color: rgb(59 130 246);
+            width: 1rem;
         }
 
         /* Add container padding to accommodate arrows */
         .carousel-container {
-            @apply px-6 flex flex-col-reverse;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 1rem;
         }
     </style>
 </head>
@@ -46,11 +59,7 @@
             <h2 class="text-2xl font-semibold text-gray-800 mb-6">Product Showcase</h2>
             <div class="carousel-container relative" id="product-carousel">
                 <!-- Dots -->
-                <div class="carousel-dots">
-                    <span class="carousel-dot active"></span>
-                    <span class="carousel-dot"></span>
-                    <span class="carousel-dot"></span>
-                </div>
+                
                 <div class="toza-carousel-track">
                     <!-- Product 1 -->
                     <div class="toza-carousel-slide">
@@ -149,6 +158,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                </div>
                 <!-- Navigation Arrows -->
                 <button class="carousel-arrow carousel-arrow-prev">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,12 +193,7 @@
         <section class="bg-white rounded-xl shadow-lg p-8 mb-12">
             <h2 class="text-2xl font-semibold text-gray-800 mb-6">Testimonials</h2>
             <div class="carousel-container relative" id="testimonial-carousel">
-                <!-- Dots -->
-                <div class="carousel-dots">
-                    <span class="carousel-dot active"></span>
-                    <span class="carousel-dot"></span>
-                    <span class="carousel-dot"></span>
-                </div>
+                
                 <div class="toza-carousel-track">
                     <!-- Testimonial 1 -->
                     <div class="toza-carousel-slide">
@@ -247,6 +256,12 @@
                         </div>
                     </div>
                 </div>
+                <!-- Dots -->
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                </div>
                 <!-- Navigation Arrows -->
                 <button class="carousel-arrow carousel-arrow-prev">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -277,12 +292,7 @@
         <section class="bg-white rounded-xl shadow-lg p-8 mb-12">
             <h2 class="text-2xl font-semibold text-gray-800 mb-6">Feature Cards</h2>
             <div class="carousel-container relative" id="feature-carousel">
-                <!-- Dots -->
-                <div class="carousel-dots">
-                    <span class="carousel-dot active"></span>
-                    <span class="carousel-dot"></span>
-                    <span class="carousel-dot"></span>
-                </div>
+                
                 <div class="toza-carousel-track">
                     <!-- Feature 1 -->
                     <div class="toza-carousel-slide">
@@ -356,6 +366,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- Dots -->
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
                 </div>
                 <!-- Navigation Arrows -->
                 <button class="carousel-arrow carousel-arrow-prev">

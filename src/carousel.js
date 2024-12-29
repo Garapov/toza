@@ -1,4 +1,4 @@
-export class Carousel {
+class Carousel {
     constructor(selector, options = {}) {
         // Get container
         this.container = document.querySelector(selector);
@@ -466,3 +466,6 @@ export class Carousel {
         this.goTo(this.currentSlide - 1);
     }
 }
+
+// Make Carousel available globally
+window.Carousel = Carousel;

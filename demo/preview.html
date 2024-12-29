@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toza Carousel - All Variations</title>
+    <link rel="stylesheet" href="../src/carousel.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .carousel-arrow {
+            @apply absolute top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center 
+                   bg-white/80 hover:bg-white text-gray-800 rounded-full shadow-lg 
+                   transition-all duration-200 z-10 cursor-pointer;
+            transform: translateY(-50%);
+            position: absolute;
+            top: 50%;
+        }
+        .carousel-arrow-prev {
+            left: -20px;
+        }
+        .carousel-arrow-next {
+            right: -20px;
+        }
+        .carousel-dots {
+            @apply flex gap-2 justify-center mb-4;
+        }
+        .carousel-dot {
+            @apply w-2 h-2 rounded-full bg-gray-200 transition-all duration-200 cursor-pointer;
+        }
+        .carousel-dot.active {
+            @apply bg-blue-500 w-4;
+        }
+
+        /* Add container padding to accommodate arrows */
+        .carousel-container {
+            @apply px-6 flex flex-col-reverse;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-center text-gray-900 mb-12">Toza Carousel Examples</h1>
+
+        <!-- Product Showcase -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Product Showcase</h2>
+            <div class="carousel-container relative" id="product-carousel">
+                <!-- Dots -->
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+                <div class="toza-carousel-track">
+                    <!-- Product 1 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-white rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e" alt="Product 1" class="w-full h-64 object-cover">
+                                <div class="p-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Premium Headphones</h3>
+                                    <p class="text-gray-600 mt-2">High-quality wireless headphones with noise cancellation</p>
+                                    <div class="mt-4 flex items-center justify-between">
+                                        <span class="text-2xl font-bold text-blue-600">$299</span>
+                                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-white rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f" alt="Product 2" class="w-full h-64 object-cover">
+                                <div class="p-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Smart Watch</h3>
+                                    <p class="text-gray-600 mt-2">Advanced fitness tracking and notifications</p>
+                                    <div class="mt-4 flex items-center justify-between">
+                                        <span class="text-2xl font-bold text-blue-600">$199</span>
+                                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-white rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1585155770447-2f66e2a397b5" alt="Product 3" class="w-full h-64 object-cover">
+                                <div class="p-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Wireless Earbuds</h3>
+                                    <p class="text-gray-600 mt-2">Crystal clear sound with long battery life</p>
+                                    <div class="mt-4 flex items-center justify-between">
+                                        <span class="text-2xl font-bold text-blue-600">$149</span>
+                                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 1 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-white rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e" alt="Product 1" class="w-full h-64 object-cover">
+                                <div class="p-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Premium Headphones</h3>
+                                    <p class="text-gray-600 mt-2">High-quality wireless headphones with noise cancellation</p>
+                                    <div class="mt-4 flex items-center justify-between">
+                                        <span class="text-2xl font-bold text-blue-600">$299</span>
+                                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-white rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f" alt="Product 2" class="w-full h-64 object-cover">
+                                <div class="p-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Smart Watch</h3>
+                                    <p class="text-gray-600 mt-2">Advanced fitness tracking and notifications</p>
+                                    <div class="mt-4 flex items-center justify-between">
+                                        <span class="text-2xl font-bold text-blue-600">$199</span>
+                                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-white rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1585155770447-2f66e2a397b5" alt="Product 3" class="w-full h-64 object-cover">
+                                <div class="p-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Wireless Earbuds</h3>
+                                    <p class="text-gray-600 mt-2">Crystal clear sound with long battery life</p>
+                                    <div class="mt-4 flex items-center justify-between">
+                                        <span class="text-2xl font-bold text-blue-600">$149</span>
+                                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <button class="carousel-arrow carousel-arrow-prev">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="carousel-arrow carousel-arrow-next">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="bg-gray-100 rounded-lg p-4 mt-4">
+                <code class="text-sm text-gray-800">
+                    new Carousel('#product-carousel', { 
+                        itemsPerView: 3,
+                        gap: 20,
+                        navigation: {
+                            arrows: true,
+                            dots: true
+                        }
+                    });
+                </code>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Testimonials</h2>
+            <div class="carousel-container relative" id="testimonial-carousel">
+                <!-- Dots -->
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+                <div class="toza-carousel-track">
+                    <!-- Testimonial 1 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-6 bg-blue-50 rounded-xl">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/150?img=1" alt="Avatar" class="w-12 h-12 rounded-full">
+                                <div class="ml-4">
+                                    <h3 class="font-semibold text-gray-800">Sarah Johnson</h3>
+                                    <p class="text-gray-600">Marketing Director</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">"This product has completely transformed how we handle our workflow. The interface is intuitive and the features are exactly what we needed."</p>
+                            <div class="mt-4 flex text-yellow-400">
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-6 bg-blue-50 rounded-xl">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/150?img=2" alt="Avatar" class="w-12 h-12 rounded-full">
+                                <div class="ml-4">
+                                    <h3 class="font-semibold text-gray-800">Michael Chen</h3>
+                                    <p class="text-gray-600">Software Engineer</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">"The attention to detail and performance optimization is outstanding. It's rare to find a solution that's both powerful and easy to implement."</p>
+                            <div class="mt-4 flex text-yellow-400">
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-6 bg-blue-50 rounded-xl">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/150?img=3" alt="Avatar" class="w-12 h-12 rounded-full">
+                                <div class="ml-4">
+                                    <h3 class="font-semibold text-gray-800">Emily Rodriguez</h3>
+                                    <p class="text-gray-600">Product Manager</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">"We've seen a 40% increase in user engagement since implementing this solution. The support team has been incredibly helpful throughout."</p>
+                            <div class="mt-4 flex text-yellow-400">
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <button class="carousel-arrow carousel-arrow-prev">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="carousel-arrow carousel-arrow-next">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="bg-gray-100 rounded-lg p-4 mt-4">
+                <code class="text-sm text-gray-800">
+                    new Carousel('#testimonial-carousel', { 
+                        itemsPerView: 1,
+                        autoHeight: true,
+                        navigation: {
+                            arrows: true,
+                            dots: true
+                        }
+                    });
+                </code>
+            </div>
+        </section>
+
+        <!-- Feature Cards -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Feature Cards</h2>
+            <div class="carousel-container relative" id="feature-carousel">
+                <!-- Dots -->
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+                <div class="toza-carousel-track">
+                    <!-- Feature 1 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-gradient-to-br from-purple-500 to-indigo-600 p-6 rounded-xl text-white">
+                                <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <h3 class="text-xl font-bold mb-2">Lightning Fast</h3>
+                                <p class="text-purple-100">Experience blazing fast performance with our optimized architecture</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-gradient-to-br from-blue-500 to-teal-400 p-6 rounded-xl text-white">
+                                <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                                <h3 class="text-xl font-bold mb-2">Secure by Default</h3>
+                                <p class="text-blue-100">Built-in security features to keep your data safe</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-gradient-to-br from-pink-500 to-red-500 p-6 rounded-xl text-white">
+                                <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                </svg>
+                                <h3 class="text-xl font-bold mb-2">Auto Updates</h3>
+                                <p class="text-pink-100">Always stay up to date with automatic updates</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 1 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-gradient-to-br from-purple-500 to-indigo-600 p-6 rounded-xl text-white">
+                                <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <h3 class="text-xl font-bold mb-2">Lightning Fast</h3>
+                                <p class="text-purple-100">Experience blazing fast performance with our optimized architecture</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-gradient-to-br from-blue-500 to-teal-400 p-6 rounded-xl text-white">
+                                <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                                <h3 class="text-xl font-bold mb-2">Secure by Default</h3>
+                                <p class="text-blue-100">Built-in security features to keep your data safe</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="toza-carousel-slide">
+                        <div class="p-4">
+                            <div class="bg-gradient-to-br from-pink-500 to-red-500 p-6 rounded-xl text-white">
+                                <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                </svg>
+                                <h3 class="text-xl font-bold mb-2">Auto Updates</h3>
+                                <p class="text-pink-100">Always stay up to date with automatic updates</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <button class="carousel-arrow carousel-arrow-prev">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="carousel-arrow carousel-arrow-next">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="bg-gray-100 rounded-lg p-4 mt-4">
+                <code class="text-sm text-gray-800">
+                    new Carousel('#feature-carousel', { 
+                        itemsPerView: 3,
+                        gap: 16,
+                        navigation: {
+                            arrows: true,
+                            dots: true
+                        }
+                    });
+                </code>
+            </div>
+        </section>
+    </div>
+
+    <script src="../src/carousel.js" defer></script>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Product showcase
+            new Carousel('#product-carousel', {
+                itemsPerView: 3,
+                gap: 20,
+                navigation: {
+                    arrows: true,
+                    dots: true
+                }
+            });
+
+            // Testimonials
+            new Carousel('#testimonial-carousel', {
+                itemsPerView: 1,
+                autoHeight: true,
+                navigation: {
+                    arrows: true,
+                    dots: true
+                }
+            });
+
+            // Feature cards
+            new Carousel('#feature-carousel', {
+                itemsPerView: 3,
+                gap: 16,
+                navigation: {
+                    arrows: true,
+                    dots: true
+                }
+            });
+        });
+    </script>
+</body>
+</html>
